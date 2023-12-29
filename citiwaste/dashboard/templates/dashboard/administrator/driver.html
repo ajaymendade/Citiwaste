@@ -1,0 +1,98 @@
+{% extends 'dashboard/basic.html' %}
+{% load static %}
+{% block title %} Driver Data {% endblock %}
+
+{% block extranav %}
+		<li class="nav-item">
+          <a class="nav-link {% block home%} {%endblock%}" href="{%url 'dashboard:adminhome'%}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{%url 'dashboard:profile'%}">Profile</a>
+        </li>
+
+ {% endblock %}
+
+
+ {% block body %}
+
+<style>
+    .container {
+      margin-top: 50px;
+    }
+    .table {
+      width: 100%;
+      margin-bottom: 1rem;
+      color: #212529;
+    }
+    .table th,
+    .table td {
+      padding: 0.75rem;
+      vertical-align: top;
+      border-top: 1px solid #dee2e6;
+    }
+    .table thead th {
+      vertical-align: bottom;
+      border-bottom: 2px solid #dee2e6;
+    }
+    .table tbody + tbody {
+      border-top: 2px solid #dee2e6;
+    }
+    .table .table {
+      background-color: #ffffff;
+    }
+    .table-sm th,
+    .table-sm td {
+      padding: 0.3rem;
+    }
+    .table-bordered {
+      border: 1px solid #dee2e6;
+    }
+    .table-bordered th,
+    .table-bordered td {
+      border: 1px solid #dee2e6;
+    }
+    .table-bordered thead th,
+    .table-bordered thead td {
+      border-bottom-width: 2px;
+    }
+    .text-center {
+      text-align: center;
+    }
+    .btn-view {
+      background-color: #007bff;
+      border-color: #007bff;
+      color: #ffffff;
+    }
+    .btn-view:hover {
+      background-color: #0056b3;
+      border-color: #0056b3;
+    }
+  </style>
+
+
+  <div class="container">
+  <h1>List of Drivers</h1>
+  <div class="text-right mb-3">
+    <a href="{%url 'dashboard:driverregistration'%}" class="btn btn-primary">Register Driver</a>
+  </div>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Mobile Number</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+    {%for driver in drivers%}
+      <tr>
+        <td>{{driver.user.first_name}} {{driver.user.last_name}}</td>
+        <td>{{driver.mobile_no}}</td>
+        <td>{{driver.user}}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+ {% endblock %}

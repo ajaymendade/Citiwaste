@@ -1,0 +1,84 @@
+{% extends 'website/basic.html' %}
+{%load static%}
+{%block title%}HomePage {%endblock%}
+{% block home%} active{%endblock%}
+{%block body%}
+
+
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #2B2B2B;
+    
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+    height: 80vh;
+  }
+  .logo {
+    width: 200px;
+    height: 200px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+  }
+  .name {
+    font-size: 400%;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 10px;
+    text-align: center;
+    font-family: "Times New Roman", Times, serif;
+  }
+  .tagline {
+    font-size: 150%;
+    color: #ffffff;
+    text-align: center;
+  }
+  
+  @media (min-width: 768px) {
+    .container {
+      flex-direction: row;
+      align-items: center;
+    }
+    .logo {
+      margin-right: 50px;
+      margin-bottom: 0;
+    }
+    .name {
+      text-align: left;
+    }
+    #rightbuttons {
+      margin-left: auto;
+      margin-right: 0;
+      margin-top: 50px;
+    }
+  }
+
+  #rightbuttons {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+</style>
+
+
+<div class="container">
+  <img src="{% static '/website/citiwasteimg.png'%}" alt="Citiwaste logo" class="logo">
+  <div>
+    <div class="name">CitiWaste</div>
+    <div class="tagline">"Cleanliness of your city is on your fingertips"</div>
+  </div>
+  <div class="d-flex flex-column" id="rightbuttons">
+    <button type="button" class="btn btn-outline-info mb-4 btn-lg" >Download Mobile App</button>
+    <button type="button" class="btn btn-outline-light btn-lg">Know More About us</button>
+  </div>
+</div>
+
+
+
+
+{%endblock%}

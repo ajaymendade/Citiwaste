@@ -1,0 +1,159 @@
+{% extends 'website/basic.html'%}
+{% load static %}
+{%block title%}About Us {%endblock%}
+{% block about%}active {%endblock%}
+{%block body%}
+
+<style>
+body {
+      font-family: Arial, sans-serif;
+    }
+
+main {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.card {
+  margin-bottom: 20px;
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Custom styles for the footer */
+.footer {
+  margin-top: 50px;
+  background-color: #f8f9fa;
+  color: #666;
+  padding: 20px 0;
+  font-size: 14px;
+}
+
+.footer a {
+  color: #666;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: #007bff;
+}
+
+.footer i {
+  color: #007bff;
+}
+
+.footer .social-icons i {
+  margin-right: 10px;
+}
+
+.footer .contact-info i {
+  margin-right: 10px;
+  width: 20px;
+}
+
+ 
+
+@media (max-width: 768px) {
+  header {
+    background-position: center;
+  }
+
+  .card-img-top {
+    height: auto;
+  }
+
+
+  .footer .col-md-6 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+}
+
+</style>
+
+
+
+
+  <header class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">About Us</h1>
+      <p class="lead">We are a company that specializes in creating beautiful and functional websites.</p>
+    </div>
+  </header>
+
+  <main class="container my-5">
+
+    <section class="row mb-5">
+      <div class="col-md-4">
+        <div class="card">
+          <img src="https://via.placeholder.com/350x200" alt="Team Member" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">John Doe</h5>
+            <p class="card-text">Web Designer</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img src="https://via.placeholder.com/350x200" alt="Team Member" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">Jane Doe</h5>
+            <p class="card-text">Web Developer</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <img src="https://via.placeholder.com/350x200" alt="Team Member" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">Bob Smith</h5>
+            <p class="card-text">Graphic Designer</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-5">
+      <h2>Our Mission</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, enim id interdum faucibus, ipsum lacus egestas eros, ac commodo mauris erat sed nibh. Sed luctus dolor vitae nisl feugiat, sit amet gravida ex dignissim. Ut molestie elementum tortor nec malesuada. Nulla facilisi. Suspendisse vitae ipsum in nunc finibus mollis. Donec euismod, velit ac venenatis posuere, turpis dolor pharetra magna, non accumsan velit odio in ante.</p>
+    </section>
+
+    <section>
+      <h2>Our History</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, enim id interdum faucibus, ipsum lacus egestas eros, ac commodo mauris erat sed nibh. Sed luctus dolor vitae nisl feugiat, sit amet gravida ex dignissim. Ut molestie elementum tortor nec malesuada. Nulla facilisi. Suspendisse vitae ipsum in nunc finibus mollis. Donec euismod, velit ac venenatis posuere, turpis dolor pharetra magna, non
+     </section>
+
+  </main>
+
+  <footer class="bg-light py-3 footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <p style="font-size: 120%;">&copy; 2023 CitiWaste</p>
+      </div>
+      <div class="col-md-6 text-right">
+        <a href="/">Home</a> | <a href="/contact">Contact Us</a> | <a href="#">Terms of Service</a> | <a href="#">Privacy Policy</a>
+        <br>
+        <a href="https://www.facebook.com/ourcompany"><i class="fab fa-facebook fa-lg mx-2"></i></a>
+        <a href="https://twitter.com/ourcompany"><i class="fab fa-twitter fa-lg mx-2"></i></a>
+        <a href="https://www.instagram.com/ourcompany"><i class="fab fa-instagram fa-lg mx-2"></i></a>
+        <br>
+        <i class="fas fa-phone-alt mx-2"></i> 555-555-5555
+        <br>
+        <i class="fas fa-envelope mx-2"></i> info@ourcompany.com
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+{%endblock%}

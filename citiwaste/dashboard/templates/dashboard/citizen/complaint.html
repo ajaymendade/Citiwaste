@@ -1,0 +1,130 @@
+{% extends 'dashboard/basic.html' %}
+{% load static %}
+{% block title %} Complaint {% endblock %}
+{% block extranav %}
+        <li class="nav-item">
+          <a class="nav-link" href="{%url 'dashboard:citizendashboard'%}">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{%url 'dashboard:citizenprofile'%}">Profile</a>
+        </li>
+{% endblock %}
+{% block body %}
+
+<style>
+    /* Map container */
+    #map {
+        height: 400px;
+        margin-bottom: 20px;
+    }
+    
+    /* Form container */
+    .form-container {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f8f8f8;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Input fields */
+    .form-container input[type="file"] {
+        margin-bottom: 10px;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 100%;
+    }
+    
+    .form-container textarea {
+        margin-bottom: 10px;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 100%;
+        resize: vertical;
+        height: 100px; /* Adjust the height as needed */
+    }
+    
+    /* Submit button */
+    .form-container input[type="submit"] {
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+    }
+    
+    /* Alert messages */
+    .alert {
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 4px;
+        color: #fff;
+        font-weight: bold;
+        text-align: center;
+    }
+    
+    .alert-success {
+        background-color: #5cb85c;
+    }
+    
+    .alert-error {
+        background-color: #d9534f;
+    }
+</style>
+
+{% for msg in messages %}
+    <div class="alert alert-{{msg.tags}}" role="alert">
+       {{ msg }}
+    </div>
+{% endfor %}
+
+<div id="map"></div>
+<div class="form-container">
+    <form action="{% url 'dashboard:complaint' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" id="latitude" name="latitude">
+        <input type="hidden" id="longitude" name="longitude">
+        <input type="file" name="photo" accept="image/*">
+        <textarea id="description" name="description">Tell about the area and add note here (delete this before adding)</textarea>
+        <input type="submit" value="Submit Complaint">
+    </form>
+</div>
+
+
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+    var map = L.map('map').setView([19.996435, 73.783427], 13);
+
+    L.tileLayer('https://api.maptiler.com/maps/streets/{z}/{x}/{y}.png?key=uUHoMEkzbalegBmYM7CG', {
+        tileSize: 512,
+        zoomOffset: -1,
+        attribution: 'Map data &copy; <a href="https://www.mapbox.com/">&copy; MapTiler</a>',
+        maxZoom: 18
+    }).addTo(map);
+
+    var marker;
+
+    map.on('click', function(e) {
+        if (marker) {
+            map.removeLayer(marker);
+        }
+        marker = L.marker(e.latlng).addTo(map);
+        document.getElementById('latitude').value = e.latlng.lat;
+        document.getElementById('longitude').value = e.latlng.lng;
+    });
+
+    document.querySelector('form').addEventListener('submit', function(e) {
+        if (!document.getElementById('latitude').value || !document.getElementById('longitude').value) {
+            e.preventDefault();
+            alert('Please select a location on the map.');
+        }
+    });
+</script>
+
+{% endblock %}

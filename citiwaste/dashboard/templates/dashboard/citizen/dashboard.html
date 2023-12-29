@@ -1,0 +1,96 @@
+{% extends 'dashboard/basic.html' %}
+{% load static %}
+{% block title %} Dashboard {% endblock %}
+{% block extranav %}
+        <li class="nav-item">
+          <a class="nav-link" href="{%url 'dashboard:complaint'%}">Complaint</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{%url 'dashboard:citizenprofile'%}">Profile</a>
+        </li>
+{% endblock %}
+{% block body %}
+    
+<style>
+    .container {
+      margin-top: 50px;
+    }
+    .table {
+      width: 100%;
+      margin-bottom: 1rem;
+      color: #212529;
+    }
+    .table th,
+    .table td {
+      padding: 0.75rem;
+      vertical-align: top;
+      border-top: 1px solid #dee2e6;
+    }
+    .table thead th {
+      vertical-align: bottom;
+      border-bottom: 2px solid #dee2e6;
+    }
+    .table tbody + tbody {
+      border-top: 2px solid #dee2e6;
+    }
+    .table .table {
+      background-color: #ffffff;
+    }
+    .table-sm th,
+    .table-sm td {
+      padding: 0.3rem;
+    }
+    .table-bordered {
+      border: 1px solid #dee2e6;
+    }
+    .table-bordered th,
+    .table-bordered td {
+      border: 1px solid #dee2e6;
+    }
+    .table-bordered thead th,
+    .table-bordered thead td {
+      border-bottom-width: 2px;
+    }
+    .text-center {
+      text-align: center;
+    }
+    .btn-view {
+      background-color: #007bff;
+      border-color: #007bff;
+      color: #ffffff;
+    }
+    .btn-view:hover {
+      background-color: #0056b3;
+      border-color: #0056b3;
+    }
+  </style>
+
+
+  <div class="container">
+  <h2>List of Request done by You</h2>
+  <p style="color:red">***If status is 1 Complaint is pending and if 2 Complaint has been resolved***</p>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Complaint Id</th>
+          <th>Name</th>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for complaint in complaints%}
+        <tr>
+          <td>{{complaint.id}}</td>
+          <td>{{user.first_name}} {{user.last_name}}</td>
+          <td>{{complaint.datetime.date}}</td>
+          <td>{{complaint.datetime.time}}</td>
+          <td>{{complaint.status}}</td>
+        </tr>
+        {% endfor %}  
+      </tbody>
+    </table>
+  </div>
+
+{% endblock %}

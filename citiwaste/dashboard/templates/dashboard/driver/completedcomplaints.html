@@ -1,0 +1,100 @@
+{% extends 'dashboard/basic.html' %}
+{% load static %}
+{% block title %} Driver - Completed {% endblock %}
+
+{% block extranav %}
+		    <li class="nav-item">
+          <a class="nav-link " href="{%url 'dashboard:driverhome'%}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{%url 'dashboard:driverprofile'%}">Profile</a>
+        </li>
+
+ {% endblock %}
+
+{% block body %}
+
+
+<style>
+    .container {
+      margin-top: 50px;
+    }
+    .table {
+      width: 100%;
+      margin-bottom: 1rem;
+      color: #212529;
+    }
+    .table th,
+    .table td {
+      padding: 0.75rem;
+      vertical-align: top;
+      border-top: 1px solid #dee2e6;
+    }
+    .table thead th {
+      vertical-align: bottom;
+      border-bottom: 2px solid #dee2e6;
+    }
+    .table tbody + tbody {
+      border-top: 2px solid #dee2e6;
+    }
+    .table .table {
+      background-color: #ffffff;
+    }
+    .table-sm th,
+    .table-sm td {
+      padding: 0.3rem;
+    }
+    .table-bordered {
+      border: 1px solid #dee2e6;
+    }
+    .table-bordered th,
+    .table-bordered td {
+      border: 1px solid #dee2e6;
+    }
+    .table-bordered thead th,
+    .table-bordered thead td {
+      border-bottom-width: 2px;
+    }
+    .text-center {
+      text-align: center;
+    }
+    .btn-view {
+      background-color: #007bff;
+      border-color: #007bff;
+      color: #ffffff;
+    }
+    .btn-view:hover {
+      background-color: #0056b3;
+      border-color: #0056b3;
+    }
+  </style>
+
+
+  <div class="container">
+  <h1>List of Requests Completed</h1>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Complaint ID</th>
+        <th>Name</th>
+        <th>Mobile Number</th>
+        <th>Date</th>
+        <th>Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for complaint in complaints %}
+      <tr>
+        <td>{{ complaint.id }}</td>
+        <td>{{ complaint.user.first_name }} {{ complaint.user.last_name }}</td>
+        <td>{{ complaint.user.citizen.mobile_no }}</td>
+        <td>{{ complaint.datetime.date }}</td>
+        <td>{{ complaint.datetime.time }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends 'dashboard/basic.html' %}
+{% load static %}
+{% block title %} Map {% endblock %}
+
+{% block extranav %}
+		<li class="nav-item">
+          <a class="nav-link" href="{%url 'dashboard:driverhome'%}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{%url 'dashboard:completedcomplaints'%}">Completed Complaints</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{%url 'dashboard:driverprofile'%}">Profile</a>
+        </li>
+
+ {% endblock %}
+
+{% block body %}
+<style>
+        #map {
+            height: 400px;
+        }
+    </style>
+  
+    <div class="container">
+        <h1>View Map</h1>
+        <div id="map"></div>
+    </div>
+
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.js"></script>
+    <script>
+        // Get the complaint coordinates from the backend
+        var latitude = {{ complaint.latitude }};
+        var longitude = {{ complaint.longitude }};
+
+        // Initialize the map
+        mapboxgl.accessToken = 'uUHoMEkzbalegBmYM7CG';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [longitude, latitude],
+            zoom: 12
+        });
+
+        // Add a marker to the map
+        var marker = new mapboxgl.Marker()
+            .setLngLat([longitude, latitude])
+            .addTo(map);
+
+        // Draw a route using a GeoJSON LineString
+        var routeCoordinates = [
+            [longitude, latitude],  // Start point
+            // Add more coordinates for the route
+        ];
+
+        var route = {
+            'type': 'Feature',
+            'properties': {},
+            'geometry': {
+                'type': 'LineString',
+                'coordinates': routeCoordinates
+            }
+        };
+
+        map.on('load', function () {
+            map.addSource('route', {
+                'type': 'geojson',
+                'data': route
+            });
+
+            map.addLayer({
+                'id': 'route',
+                'type': 'line',
+                'source': 'route',
+                'layout': {
+                    'line-join': 'round',
+                    'line-cap': 'round'
+                },
+                'paint': {
+                    'line-color': '#888',
+                    'line-width': 6
+                }
+            });
+        });
+    </script>
+
+
+{% endblock %}
